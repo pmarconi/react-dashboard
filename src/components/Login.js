@@ -1,10 +1,12 @@
 import React from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
+import { login } from './../store/actions/authentication';
 
-const Login = () => {
+const Login = (props) => {
   const { register, handleSubmit, setValue } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => props.login(data);
 
   React.useEffect(() => {
     register('email');
@@ -49,4 +51,17 @@ const Login = () => {
   );
 };
 
-export default Login;
+/* istanbul ignore next */
+function mapStateToProps(state) {
+  return {
+    loggedIn: state.authentication.loggedIn,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login: (data) => dispatch(login(data)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
