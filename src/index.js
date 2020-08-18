@@ -11,12 +11,16 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './store';
 import Loader from './components/Loader';
 
+import { ThemeProvider } from 'styled-components';
+
 const { store, persistor } = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={<Loader />} persistor={persistor}>
-      <App />
+      <ThemeProvider theme={{ mode: 'light' }}>
+        <App />
+      </ThemeProvider>
     </PersistGate>
   </Provider>,
   document.getElementById('root')

@@ -25,7 +25,7 @@ export const login = (data) => {
   }
 };
 
-export const logout = (username, password) => {
+export const logout = () => {
   // userService.logout();
   return { type: 'LOGOUT' };
 };
